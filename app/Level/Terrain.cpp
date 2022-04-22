@@ -39,21 +39,17 @@ Terrain::Terrain(const OCARN2::Map &mapData, const OCARN2::Rsc& rscData) {
             switch(index % 6) {
                 case 0:
                     v.texCoords = glm::vec2(0, (bandHeight * row) + bandHeight);
-                    v.texCoords = glm::vec2(0, 0);
                     break;
                 case 1:
                 case 4:
                     v.texCoords = glm::vec2(0, (bandHeight * row));
-                    v.texCoords = glm::vec2(1, 0);
                     break;
                 case 2:
                 case 3:
                     v.texCoords = glm::vec2(1, (bandHeight * row) + bandHeight);
-                    v.texCoords = glm::vec2(1, 1);
                     break;
                 case 5:
                     v.texCoords = glm::vec2(1, (bandHeight * row));
-                    v.texCoords = glm::vec2(0, 1);
                     break;
             }
 
@@ -112,8 +108,8 @@ Terrain::Terrain(const OCARN2::Map &mapData, const OCARN2::Rsc& rscData) {
         memcpy(&stitchedTextures[i * 128 * 128], rscData.textures[i].data, rscData.textures[i].size);
     }
 
-    // groundMesh->textures.emplace_back( (char*) &stitchedTextures[0], 128, 128 * rscData.numTextures);
-    groundMesh->textures.emplace_back( (char*) rscData.textures[1].data, 128, 128);
+    groundMesh->textures.emplace_back( (char*) &stitchedTextures[0], 128, 128 * rscData.numTextures);
+    // groundMesh->textures.emplace_back( (char*) rscData.textures[1].data, 128, 128);
 
 
     printf("# Vertices: %d\n# Indices: %d\n", vertices.size(), indices.size());
